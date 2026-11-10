@@ -1,0 +1,68 @@
+# Role & Objective
+
+You are an expert Creative Technologist, 3D Procedural Geometry Artist, and Automotive Historian. Build a complete, self-contained, single-file interactive 3D web experience (`index.html`) using Three.js that serves as an official 1984 Chevrolet Dealership Interactive Showroom Kiosk for the all-new "1984 Chevrolet Corvette (C4)".
+
+The application must be pitched directly to prospective buyers in 1984 ("The New Spirit of America" / "A Car So Advanced, It Couldn't Be Built Until Now"), combining authentic 1984 GM marketing copy and retro-futuristic 80s digital UI with a deeply detailed, articulated procedural 3D model of the C4 Corvette.
+
+# Technical Stack & Setup
+
+- **Single-File Architecture:** Output a single, complete `index.html` containing all HTML, CSS, and JavaScript. Do NOT use external 3D model files (`.glb`,`.gltf`), external textures, or local assets that can fail to load. Everything (geometry, materials, canvas textures, sounds/UI) must be generated procedurally in code.
+- **Libraries:** Load Three.js (`r128` or ES Module equivalent via reliable CDN like `unpkg` or `cdnjs`, `OrbitControls`, and `TWEEN.js` (or GSAP) for smooth camera and mechanical animations.
+- **Rendering:** Enable shadows (`PCFSoftShadowMap`), tone mapping (`ACESFilmicToneMapping`), and build a procedural `PMREMGenerator` / custom studio environment map so the car paint, chrome, and glass have crisp, realistic showroom reflections.
+
+# Strict 3D Modeling Requirements (NO Primitive Box Cars)
+
+Do NOT build a boxy low-poly toy. Use `THREE.ExtrudeGeometry` with carefully plotted 2D `THREE.Shape` spline profiles, `THREE.LatheGeometry`, `THREE.TubeGeometry`, and layered sub-assemblies to capture the unmistakable wedge silhouette and engineering of the 1984 C4 Corvette:
+
+1. **Exterior Body & Proportions:**
+   - Sculpt the iconic sharp C4 wedge profile with the integrated black rubber beltline bumper molding wrapping 360 degrees around the car.
+   - Include the recessed front turn signals/fog lamps, functional **pop-up headlights** (mounted on rotation pivots so they flip 180 degrees open/closed), side front fender gills, body-colored B-pillar hoop, and the signature four round recessed Corvette tail lights with central "CORVETTE" rear fascia lettering and quad exhaust tips.
+   - **1984 Z51 16-inch "Salad Shooter" Directional Alloy Wheels:** Use `THREE.LatheGeometry` and radial turbine fin slots to accurately model the iconic 1984 flat-face directional aluminum wheels wrapped in Goodyear Eagle VR50 "Gatorback" tires (complete with procedural canvas tread/sidewall lettering).
+
+2. **Articulated Pivot Groups (Interactive Mechanics):**
+   Every movable assembly MUST be parented to an accurately placed `THREE.Group` hinge pivot so it animates along its real-world mechanical arc:
+   - **Forward-Tilting Clamshell Hood (`hoodPivot` at front nose hinge):** In 1984, the entire front upper fender/hood assembly tilts forward as one giant clamshell piece, exposing both the engine and the front suspension/wheel wells.
+   - **Driver & Passenger Doors (`doorLeftPivot`, `doorRightPivot`):** Swing open outward to reveal the sill plates, door panels, and cockpit.
+   - **Rear Glass Fastback Hatch (`hatchPivot` at roof hinge):** Compound-curved panoramic rear glass hatch that lifts upward on gas struts to reveal the carpeted rear cargo bay.
+   - **Targa Roof Panel (`targaPanel`):** Removable body-colored roof panel that can lift off and stow inside the rear cargo bay.
+   - **Pop-Up Headlights (`headlightPivots`):** Motorized rotation revealing the rectangular sealed-beam halogen headlamps with actual `SpotLight` beams.
+3. **Detailed Engine Bay (L83 5.7L 350 V8 "Cross-Fire Injection"):**
+   Visible when the clamshell hood tilts forward:
+   - V8 engine block with finned cast-aluminum valve covers and the signature large rectangular dual-throttle-body **"Cross-Fire Injection"** air cleaner assembly on top with chrome lid and dual intake snorkels.
+   - Serpentine belt drive with pulleys, alternator, A/C compressor, radiator shroud, braided hoses, master cylinder, and the visible C4 forged-aluminum upper control arms and transverse fiberglass mono-leaf spring suspension architecture.
+
+4. **Detailed 1984 Cockpit & Liquid-Crystal Digital Dash:**
+   - **Atari-Style LCD Digital Instrument Cluster:** Generate an animated dynamic `HTMLCanvasElement` texture (`THREE.CanvasTexture`) mapped to the instrument binnacle showing the famous 1984 neon green/orange/red bar-graph tachometer curve, digital 85 MPH speedometer, and digital fuel/oil/coolant readouts that animate in real-time when the engine is "started" or revved.
+   - High-bolstered Lear Siegler leather bucket seats with ribbed inserts, center console with the 4+3 Doug Nash manual (or automatic) shifter, two-spoke steering wheel, and Delco-Bose cassette stereo head unit.
+
+# Interactive Showroom Features & Camera System
+
+Build a sleek **"1984 Chevrolet Dealership Corvette Video Brochure" UI** (retro-futuristic 1984 CRT/vector styling, GM blue/amber/grid aesthetics, scanline toggle, period-accurate typography):
+
+1. **Camera Preset Switcher (Smooth Tweened Transitions):**
+   - `Exterior Showroom Orbit` (360° turntable mode)
+   - `Driver's Cockpit View` (inside the cabin looking at the live LCD digital dash and steering wheel)
+   - `L83 Cross-Fire Engine Close-Up` (Automatically opens the clamshell hood and zooms into the V8 bay)
+   - `Rear Fastback & Z51 Chassis View`
+   - `Low 1984 Brochure Hero Angle`
+
+2. **Interactive Mechanical Controls Panel:**
+   - Individual toggle buttons AND clickable 3D hotspots on the car for:
+     - **"Tilt Clamshell Hood"**
+     - **"Open Left / Right Doors"**
+     - **"Lift Rear Glass Hatch"**
+     - **"Remove Targa Top"**
+     - **"Flip Pop-Up Headlights & Light Beams"**
+     - **"Start L83 V8 Engine / Rev Throttle"** (Triggers subtle engine block vibration, exhaust pulse, and live tachometer/speedometer sweep on the interior LCD dash—plus optional Web Audio API synthesized V8 idle/rev sound).
+
+3. **1984 Factory Paint & Trim Configurator:**
+   - Allow the buyer to switch authentic 1984 factory colors in real time: `Bright Red`, `Silver Metallic`, `Black`, `Light Bronze Metallic`, `Medium Gray Metallic`, and `Gold Metallic`, plus interior leather trim (`Graphite`, `Saddle`, `Carmine Red`).
+
+4. **1984 Period-Accurate Sales Callouts:**
+   - Display context-sensitive spec cards as the user inspects different areas of the car (e.g., `"0.34 Coefficient of Drag — Wind-Tunnel Sculpted Fiberglass Body"`, `"5.7 Liter L83 Cross-Fire Injection V8 — 205 HP / 290 lb-ft Torque"`, `"0-95 Legal Lateral Acceleration with Available Z51 Performance Handling Package"`, `"Standard Liquid-Crystal Microprocessor Instrument Cluster"`).
+
+# Code Quality & Execution Rules
+   - Write clean, modular, fully implemented code. Do NOT leave `// TODO` comments or placeholder shapes.
+   - Ensure all hinge pivots (`THREE.Group`) have their origin positioned at the exact physical hinge point before adding child meshes with local offsets.
+   - Ensure lighting illuminates both the glossy exterior body AND the dark interior/engine bay when opened.
+   - Output ONLY the complete, runnable `index.html` code block.

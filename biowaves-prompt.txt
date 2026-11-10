@@ -1,0 +1,22 @@
+Create one complete, self-contained HTML file for THE GLOWING TIDE, a photorealistic real-time 3D scene in three.js of a quiet beach on a moonless night where the breaking waves blaze with electric-blue BIOLUMINESCENCE, as a self-running scene.
+
+Make it AS PHOTOREALISTIC AS POSSIBLE: a deep, clear night sky packed with stars and the soft arch of the Milky Way, a faint glow of airglow at the horizon, and no moon, so the sea is almost black except where it lights up. Physically based materials and lighting, ACES filmic tone mapping, a gentle bloom on the bioluminescent glow, subtle haze over the water, and a faint film grain. The colours are the deep navy and black of the night sea, the silver-grey of the starlit sand, the near-black silhouettes of a rocky headland and a few leaning palms or dune grasses, and the vivid cyan and electric blue of the glow. It should look like a long-exposure nature photograph brought to life, not a game or a cartoon. Do not make it low-poly, flat-shaded or cartoonish, and never a stained-glass look.
+
+THE WAVES, the heart of the scene:
+- Lively, energetic surf: choppy waves roll in and break onto the beach one after another, crashing with spray and foam and washing far up the sand, so the glow flares bright and often. Keep it a believable night beach, not a storm.
+- Wherever the water is disturbed it GLOWS: the ripple crests light up first in a thin bright cyan line, the glow spreads out along each little wavelet as it moves, the foam blazes electric blue where the wash meets the sand and then fades as the water calms, and the thin sheets of wash sliding up the sand sparkle with thousands of tiny blue points that wink out as the water drains back.
+- Calm water stays dark, and the glow is strongest where the motion is strongest, brightest where the wash meets the sand, so the light always follows the physics of the waves.
+- The glowing wash reflects softly on the wet sand, which shines like a dark mirror catching the blue light and the stars.
+
+LIFE AND DETAIL:
+- A line of footprints in the wet sand flickers with faint blue sparks where the wash runs over them.
+- Now and then a small fish darts through the shallows inside a breaking wave, leaving a short glowing trail.
+- Shooting stars streak across the sky once or twice per loop, and the stars twinkle gently.
+- Distant swells far out at sea catch faint flashes of blue as they crest.
+- A light sea breeze moves the dune grasses, and a thin mist drifts low along the shore.
+
+Add a gentle synthesized surf and wind ambience with Web Audio if you like; if so, show a small, unobtrusive "click for sound" hint and never block the scene behind it.
+
+Build it as one clean floating diorama block with a neat cut cross-section. The camera looks down at the block from a 45 degree angle and holds that angle; it turns slowly around the block by itself, and the user can drag to rotate it all the way around at any time and scroll to zoom.
+
+ Draw everything in code; never load images, textures or models. Any libraries from a CDN are allowed. Reply with only the complete HTML file.

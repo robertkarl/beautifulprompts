@@ -1,0 +1,76 @@
+Build a single self-contained HTML file: an animated pixel-art cutaway
+(cross-section) of a 19th-century lighthouse on a rock at sea. It runs on its
+own through a continuous day/night cycle, like a living diagram.
+
+HARD CONSTRAINTS
+- One file, index.html, with inline CSS and JS. No network requests of any
+  kind: no libraries, CDNs, web fonts, images, or audio. All art is drawn
+  procedurally in code (Canvas 2D or WebGL).
+- Works by opening the file from disk in current Chrome, Firefox, and Safari.
+  No build step. No console errors.
+- Render to a low-resolution internal buffer (about 480x270) and scale it up by
+  whole-number factors with nearest-neighbour sampling so pixels stay crisp.
+  Letterbox to fit any window size and handle resize.
+- Pixel-art discipline: a small, deliberate palette. Shading and light come
+  from palette shifts, banding, and dithering, not smooth alpha gradients or
+  blur.
+- Animate with requestAnimationFrame and delta time. Simulation speed must not
+  depend on frame rate. Target 60 fps on a mid-range laptop.
+- Deterministic: use a seeded PRNG, never Math.random. The scene's state must
+  be a function of simulated time, so that jumping to any time of day shows the
+  correct state everywhere (keeper position, drive weight height, lamp on or
+  off, sky).
+- URL parameters: ?t=HH:MM starts at that simulated time, ?paused=1 starts
+  paused, ?seed=N sets the seed.
+
+THE SCENE
+- The tower is shown in cutaway: the near wall is removed to reveal the
+  interior, with the wall's thickness visible at the cut edges and exterior
+  masonry still visible at the sides.
+- Four floors, bottom to top:
+  1. Oil store: casks, oil cans, shelves.
+  2. Keeper's quarters: bunk, stove with a fire, table with logbook, pendulum
+     clock.
+  3. Watch room: weight-driven clockwork with meshing gears, and a drive weight
+     on a chain that hangs down through the floors below.
+  4. Lantern room: a Fresnel lens rotating around a lamp, glazing, a gallery
+     with a railing, a domed copper roof with a vent and a weathervane.
+- A spiral stair connects all floors.
+- Outside: a rock base with breaking waves, sea to the horizon, a distant
+  headland, sky with stars, moon, sun, and clouds, and a keeper's cottage
+  beside the tower with lit windows and chimney smoke.
+
+ANIMATION (the mechanisms must be coupled, not independent loops)
+- Gears: at least four, with visible teeth. Adjacent gears turn in opposite
+  directions at speeds inversely proportional to their tooth counts.
+- Drive weight: descends at a rate tied to the gear train. When it nears the
+  bottom, the keeper winds it back up.
+- Lens: its rotation is driven by the same gear train. Because the view is
+  side-on, the beam should lengthen, shorten, and flash as it sweeps past the
+  viewer, and it should light whatever it crosses (sea, clouds, rock).
+- Pendulum clock: swings steadily, and its hands show the simulated time.
+- Keeper: a small character with a daily routine. He walks and climbs the
+  stair along its actual geometry (no teleporting), checks the oil, winds the
+  clockwork, lights the lamp at dusk, puts it out at dawn, writes the log, and
+  sleeps.
+- Day/night: a full 24 hours passes in about 3 minutes. The sky palette moves
+  through dawn, day, dusk, and night. Stars fade in and out, the sun and moon
+  travel, and warm interior light (stove, lamp, windows) dominates at night.
+- Weather: a wind value that drifts over time and drives the weathervane, the
+  chimney smoke, cloud speed, and wave height together.
+- Sea: animated waves, foam on the rocks, and reflections of the moon and the
+  beam.
+
+OVERLAY UI (use a bitmap pixel font defined in the file)
+- Title: invent a name, location, and founding year for the lighthouse.
+- A numbered callout for each floor and for the stair, with a leader line to
+  the room and a one-line subtitle naming its contents.
+- Status panel: simulated time, wind, lamp state, and lens rotation rate. Every
+  value is read live from the simulation.
+- Keeper's log: one or two lines describing what the keeper is doing right
+  now, changing as his activity changes.
+- Timeline scrubber: drag to set the time of day. The whole scene responds
+  consistently.
+- Keys: space pauses, left and right arrows change simulation speed.
+
+Reply with the complete contents of index.html and nothing else.

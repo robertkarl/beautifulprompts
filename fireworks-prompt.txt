@@ -1,0 +1,12 @@
+PROMPT A — fireworks / particle simulator (as given to models)
+
+Note: the "create a new folder in ~/Code/QFN-fireworks/" line was path-specific
+to the original QFN run; every subsequent model gets its own fresh workdir and
+is told to deliver a self-contained build.
+
+---
+
+let's build a fireworks / particle simulator in the browser. users can click
+various types of particle effector generators, sinks, and 'fireworks' in an
+interactive display. make it engaging, fun, and beautiful. create a new folder
+in <WORKDIR>/ and keep your work there.
